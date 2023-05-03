@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import Articles from "./components/Articles";
+import AddArticles from "./components/AddArticles";
+import NavBar from "./components/NavBar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Register from "./auth/Register";
+import Login from "./auth/Login";
+import Article from "./components/Article";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <BrowserRouter>
+        <NavBar />
+        <ToastContainer position="top-right" />
+        <Routes>
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/article/:id" element={<Article />} />
+          <Route
+            path="/"
+            element={
+              <div className="row" style={{ marginTop: 70 }}>
+                <div className="col-md-8">
+                  <Articles />
+                </div>
+                <div className="col-md-4">
+                  <AddArticles />
+                </div>
+              </div>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
